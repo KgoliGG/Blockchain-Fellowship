@@ -82,7 +82,7 @@ const networks = [
   {
     name: 'polygon',
     url: 'https://matic-mumbai.chainstacklabs.com/',
-    display: 'Polygon TestNet',
+    display: 'Polygon MANTIC',
   },
 ];
 

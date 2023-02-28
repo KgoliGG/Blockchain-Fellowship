@@ -90,7 +90,6 @@ const createWallet = async (passcode, mnemonic) => {
 const fetchBalance = (address) => {
   const currentNetwork = getCurrentNetwork();
   const network = getNetworkByName(currentNetwork);
-  console.log({network})
   const { url, name } = network;
   $('#' + name).attr('checked', true);
 
@@ -100,9 +99,7 @@ const fetchBalance = (address) => {
   provider
     .getBalance(address)
     .then((balance) => {
-      console.log({balance});
       const myBalance = ethers.utils.formatEther(balance);
-      console.log(myBalance);
       $('#myBalance').html(myBalance);
     })
     .catch((err) => {
@@ -161,3 +158,17 @@ const togglePasscodeModal = () => {
 const toggleMnemonicRestoreModal = () => {
   $('#mdlMnemonicRestore').modal('toggle');
 };
+
+//Message Signing Feature
+
+    function signMessage() {
+
+      const privateKey = getPrivatekey();
+      let wallet = new ethers.Wallet(privateKey);
+      const messageToSign = document.getElementById('inputMsg').value;
+
+      wallet.signMessage(messageToSign).then((signature) => {
+        document.getElementById('signedMessage').textContent = `${signature}`;
+      });
+    }
+//Message Signing Feature
